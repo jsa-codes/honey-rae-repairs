@@ -20,13 +20,31 @@ export const TicketForm = () => {
     const honeyUserObject = JSON.parse(localHoneyUser)
 
     const handleSaveButtonClick = (event) => {
-        event.preventDefault()
-        console.log("You clicked the button!");
+        event.preventDefault();
+        console.log('You clicked the button!');
 
         // TODO: Create the object to be saved to the API
+        /* 
+            {
+                "id": 1,
+                "userId": 3,
+                "description": "(Hillie's Ticket / userId = 3 / staff = false) Saepe ex sapiente deserunt et voluptas fugiat vero quasi. Ipsam est non ipsa. Occaecati rerum ipsa consequuntur. Ratione commodi unde sint non rerum. Sit quia et aut sunt.",
+                "emergency": false,
+                "dateCompleted": "Fri Apr 29 2022 14:02:20 GMT-0500 (Central Daylight Time)"
+            }
+            
+        */
 
+            const ticketToSendToAPI = {
+                userId: honeyUserObject.id,
+                description: ticket.description,
+                emergency: ticket.emergency,
+                dateCompleted: ''
+            }
 
-        // TODO: Perform the fetch() to POST the object to the API
+        // TO-DO: Perform the fetch() to POST the object to the API
+
+        
     }
 
     return (
