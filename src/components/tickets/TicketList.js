@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./TicketList.css"
 
 // Initial state of tickets is an "empty array"
@@ -9,6 +10,7 @@ export const TicketList = () => {
     const [filteredTickets, setFilteredTickets] = useState([]);
     // State #3) - Showing filtered tickets based on whether or not the employee clicked the "Emergency Only" button.
     const [emergency, setEmergency] = useState(false)
+    const navigate = useNavigate()
 
     // honeyUserObject has:
     //  - primary key of the user
@@ -71,26 +73,26 @@ export const TicketList = () => {
     // This way, Employees can click the "Emergency Only" button to see those tickets that are "emergency tickets (urgent tickets)", but customers will only see their tickets they've submitted displayed
     return (
         <>
-            {
-                honeyUserObject.staff ? (
-                    <>
-                        <button
-                            onClick={
-                                () => {
-                                setEmergency(true);
-                            }}
-                        >Emergency Only</button>
-                        <button
-                            onClick={
-                                () => {
-                                    setEmergency(false)
-                                }
-                            }>Show All</button>
-                    </>
-                ) : (
-                    ''
-                )
-            }
+            {honeyUserObject.staff ? (
+                <>
+                    <button
+                        onClick={() => {
+                            setEmergency(true);
+                        }}
+                    >
+                        Emergency Only
+                    </button>
+                    <button
+                        onClick={() => {
+                            setEmergency(false);
+                        }}
+                    >
+                        Show All
+                    </button>
+                </>
+            ) : (
+                <button onClick={() => navigate('/ticket/create')}>Create Ticket</button>
+            )}
             <h2>List of Tickets</h2>
 
             <article className='tickets'>
