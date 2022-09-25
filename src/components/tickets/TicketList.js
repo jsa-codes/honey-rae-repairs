@@ -106,6 +106,7 @@ export const TicketList = () => {
                 <>
                 <button onClick={() => navigate('/ticket/create')}>Create Ticket</button>
                 <button onClick={() => updateOpenOnly(true)}>Show Open Tickets</button>
+                <button onClick={() => updateOpenOnly(false)}>All My Tickets</button>
                 </>
             )}
             <h2>List of Tickets</h2>
