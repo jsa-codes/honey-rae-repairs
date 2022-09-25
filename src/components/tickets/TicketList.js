@@ -11,7 +11,7 @@ export const TicketList = () => {
     // State #3) - Showing filtered tickets based on whether or not the employee clicked the "Emergency Only" button.
     const [emergency, setEmergency] = useState(false)
     const [openOnly, updateOpenOnly] =useState(false)
-    
+
     const navigate = useNavigate()
 
     // honeyUserObject has:
@@ -95,7 +95,7 @@ export const TicketList = () => {
             ) : (
                 <>
                 <button onClick={() => navigate('/ticket/create')}>Create Ticket</button>
-                <button onClick={() => navigate('/ticket/create')}>Show Open Tickets</button>
+                <button onClick={() => updateOpenOnly(true)}>Show Open Tickets</button>
                 </>
             )}
             <h2>List of Tickets</h2>
