@@ -39,7 +39,12 @@ export const TicketForm = () => {
                         className="form-control"
                         placeholder="Brief description of problem"
                         value={ticket.description}
-                        onChange={} />
+                        onChange={
+                            (evt) => {
+                                const copy = {...ticket}
+                                copy.description = evt.target.value
+                            }
+                        } />
                 </div>
             </fieldset>
             <fieldset>
