@@ -12,9 +12,11 @@ export const TicketForm = () => {
             emergency: false
     })
     /*
-        TODO: Use the useNavigation() hook so you can redirect
+        TO-DO: Use the useNavigation() hook so you can redirect
         the user to the ticket list
     */
+
+        const navigate = useNavigate()
 
     const localHoneyUser = localStorage.getItem("honey_user")
     const honeyUserObject = JSON.parse(localHoneyUser)
@@ -43,8 +45,19 @@ export const TicketForm = () => {
             }
 
         // TO-DO: Perform the fetch() to POST the object to the API
+        fetch(`http://localhost:8088/serviceTickets`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(ticketToSendToAPI)
+        } )
+            .then((response) => response.json())
+            .then(() => {
+                navigate("/tickets");
+            });
 
-        
+
     }
 
     return (
