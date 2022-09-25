@@ -91,7 +91,10 @@ export const TicketList = () => {
                     </button>
                 </>
             ) : (
+                <>
                 <button onClick={() => navigate('/ticket/create')}>Create Ticket</button>
+                <button onClick={() => navigate('/ticket/create')}>Show Open Tickets</button>
+                </>
             )}
             <h2>List of Tickets</h2>
 
