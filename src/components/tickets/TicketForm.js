@@ -43,6 +43,7 @@ export const TicketForm = () => {
                             (evt) => {
                                 const copy = {...ticket}
                                 copy.description = evt.target.value
+                                update(copy)
                             }
                         } />
                 </div>
@@ -56,6 +57,7 @@ export const TicketForm = () => {
                             (evt) => {
                                 const copy = {...ticket}
                                 copy.emergency = evt.target.checked
+                                update(copy)
                             }
                         } />
                 </div>
