@@ -67,6 +67,16 @@ export const TicketList = () => {
         }, [emergency]
     )
 
+    useEffect(
+        () => {
+            const openTicketArray = tickets.filter(ticket => {
+                return ticket.userId === honeyUserObject.id && ticket.dateCompleted === ''
+            })
+            setFilteredTickets(openTicketArray)
+        },
+        [openOnly]
+    )
+
     // The button is a "user interaction". They want to change the "state" of the component when they click on this Emergency Button
 
     // IF honeyUserObject is staff (which is true)
