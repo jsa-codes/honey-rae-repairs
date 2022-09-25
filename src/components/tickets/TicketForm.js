@@ -52,7 +52,12 @@ export const TicketForm = () => {
                     <label htmlFor="name">Emergency:</label>
                     <input type="checkbox"
                         value={ticket.emergency}
-                        onChange={} />
+                        onChange={
+                            (evt) => {
+                                const copy = {...ticket}
+                                copy.emergency = evt.target.checked
+                            }
+                        } />
                 </div>
             </fieldset>
             <button className="btn btn-primary">
