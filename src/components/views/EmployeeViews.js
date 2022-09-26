@@ -1,6 +1,5 @@
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { TicketContainer } from '../tickets/TicketContainer';
-import { TicketForm } from '../tickets/TicketForm';
 
 export const EmployeeViews = () => {
     return (
@@ -18,7 +17,6 @@ export const EmployeeViews = () => {
             >
                 <Route path='tickets' element={<TicketContainer />} />
 
-                <Route path='ticket/create' element={<TicketForm />} />
             </Route>
         </Routes>
     );
