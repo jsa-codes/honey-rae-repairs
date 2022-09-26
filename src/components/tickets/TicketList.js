@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './TicketList.css';
 
 // Initial state of tickets is an "empty array"
-export const TicketList = () => {
+export const TicketList = ({ searchTermState }) => {
     // State #1) - All Tickets
     const [tickets, setTickets] = useState([]);
     // State #2) - Showing filtered tickets based on conditions of "employee or customer"
@@ -19,6 +19,15 @@ export const TicketList = () => {
     //  - staff key on it (can be true or false)
     const localHoneyUser = localStorage.getItem('honey_user');
     const honeyUserObject = JSON.parse(localHoneyUser);
+
+    useEffect(
+        () => {
+            const searchedTickets = tickets.filter(ticket => {
+            return ticket.description.toLowerCase().startsWith(searchTermState.toLowerCase())
+        })
+        setFilteredTickets(searchedTickets)
+        },[searchTermState]
+    )
 
     // State Change #1) - Contains ALL of the tickets
     useEffect(
