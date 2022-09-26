@@ -15,16 +15,16 @@ export const EmployeeList = () => {
                 });
         }, [employees]
     )
-
-    return <>
+// REMEMBER: We need a unique key because we are iterating 👀
+    return <article className='employees'>
         {
             employees.map(employee => {
-                return <section>
+                return <section className='employee' key={`employee--${employee.id}`}>
                     <div>Name: {employee.fullName}</div>
                     <div>Email: {employee.email}</div>
                 </section>
             })
         }
-    </>
+    </article>
 
 }
