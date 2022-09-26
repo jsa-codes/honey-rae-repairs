@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import "./Employees.css"
 
 // STEP 1) Set initial state
 // STEP 2) Create first useEffect
