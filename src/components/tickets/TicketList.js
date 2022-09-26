@@ -20,6 +20,7 @@ export const TicketList = ({ searchTermState }) => {
     const localHoneyUser = localStorage.getItem('honey_user');
     const honeyUserObject = JSON.parse(localHoneyUser);
 
+    // This useEffect observes state inherited from the parent — searchTermState maintained in (TicketContainer)
     useEffect(
         () => {
             const searchedTickets = tickets.filter(ticket => {
