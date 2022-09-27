@@ -7,10 +7,23 @@
 }
 
 .employee {
-    background-color: rgb(232, 140, 232);
+    background-color: rgb(254, 224, 254);
     border: 1px solid darkmagenta;
     border-radius: 2px;
     padding: 1rem;
     margin: 1rem;
     box-shadow: 1px 2px 10px rgb(170, 165, 165);
+    min-width: 280px;
+    max-width: 300px;
+}
+
+.employee__header {
+    font-size: larger;
+    font-weight: 700;
+    line-height: 3rem;
+}
+
+.employee__footer {
+    margin: 1rem 0 0.25rem 0;
+    font-style: oblique;
 }

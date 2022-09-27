@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 export const EmployeeDetails = () => {
     const {employeeId} = useParams()
-    const [employee, updateEmployee] = useState()
+    const [employee, updateEmployee] = useState({})
 
     useEffect(
         () => {
@@ -19,9 +19,11 @@ export const EmployeeDetails = () => {
     
     return (
         <section className='employee'>
-            <header>Name: {employee.user.fullName}</header>
+            <header className='employee__header'>{employee?.user?.fullName}</header>
+            <div>Email: {employee?.user?.email}</div>
             <div>Specialty: {employee.specialty}</div>
             <div>Rate: {employee.rate}</div>
+            <footer className='employee__footer'>Number of tickets being worked on: {employee?.employeeTickets?.length}</footer>
         </section>
     );
 }
