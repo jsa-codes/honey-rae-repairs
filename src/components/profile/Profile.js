@@ -1,3 +1,5 @@
+import { CustomerForm } from './CustomerForm';
+import { EmployeeForm } from './EmployeeForm';
 
 export const Profile = () => {
 
@@ -7,8 +9,8 @@ export const Profile = () => {
     const honeyUserObject = JSON.parse(localHoneyUser);
 
     if (honeyUserObject.staff) {
-        return <></>;
+        return <EmployeeForm />;
     } else {
-        return <></>;
+        return <CustomerForm />;
     }
 };
