@@ -17,5 +17,11 @@ export const EmployeeDetails = () => {
         }, [employeeId]
     )
     
-    return <></>
+    return (
+        <section className='employee'>
+            <header>Name: {employee.user.fullName}</header>
+            <div>Specialty: {employee.specialty}</div>
+            <div>Rate: {employee.rate}</div>
+        </section>
+    );
 }
