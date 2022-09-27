@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Employee } from './Employee'
 import "./Employees.css"
 
 // STEP 1) Set initial state
@@ -17,11 +18,15 @@ export const EmployeeList = () => {
         }, [employees]
     )
 // REMEMBER: We need a unique key because we are iterating 👀
+// Map Employees
+//      - FOR EACH Employee set the employee's (id, fullName and email)
+//          - 
     return <article className='employees'>
         {
-            employees.map(employee => {
-                
-            })
+            employees.map(employee => <Employee 
+                id={employee.id} 
+                fullName={employee.fullName} 
+                email={employee.email}/>)
         }
     </article>
 
