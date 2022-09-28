@@ -127,6 +127,7 @@ export const TicketList = ({ searchTermState }) => {
                             <header>
                                 <Link to={`/tickets/${ticket.id}/edit`}>Ticket {ticket.id}</Link>
                             </header>
+                            <section>{ticket.description}</section>
                             <footer>Emergency: {ticket.emergency ? '🆘' : 'No'}</footer>
                         </section>
                     );
