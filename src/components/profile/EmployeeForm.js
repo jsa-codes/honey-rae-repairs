@@ -18,7 +18,8 @@ export const EmployeeForm = () => {
         fetch(`http://localhost:8088/employees?userId=${honeyUserObject.id}`)
             .then((response) => response.json())
             .then((data) => {
-                functionName(variableName);
+                const employeeObject = data[0]
+                updateProfile(employeeObject);
             });
     }, []);
 
@@ -44,7 +45,12 @@ export const EmployeeForm = () => {
                         className='form-control'
                         value={profile.specialty}
                         onChange={(evt) => {
-                            // TO-DO: Update specialty property
+                            // Copy state
+                            const copy = {...profile}
+                            // Modify the copy
+                            copy.specialty = evt.target.value
+                            // Update state with the copy
+                            updateProfile(copy)
                         }}
                     />
                 </div>
@@ -57,7 +63,12 @@ export const EmployeeForm = () => {
                         className='form-control'
                         value={profile.rate}
                         onChange={(evt) => {
-                            // TO-DO: Update rate property
+                            // Copy state
+                            const copy = { ...profile };
+                            // Modify the copy
+                            copy.rate = parseFloat(evt.target.value, 2);
+                            // Update state with the copy
+                            updateProfile(copy);
                         }}
                     />
                 </div>
