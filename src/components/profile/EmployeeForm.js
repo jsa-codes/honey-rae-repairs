@@ -9,6 +9,15 @@ export const EmployeeForm = () => {
         userId: 0,
     });
 
+    const [feedback, setFeedback] = useState('');
+
+    useEffect(() => {
+        if (feedback !== '') {
+            // Clear feedback to make entire element disappear after 3 seconds
+            setTimeout(() => setFeedback(''), 3000);
+        }
+    }, [feedback]);
+
     // Get the item out of localStorage
     const localHoneyUser = localStorage.getItem('honey_user');
     // Parse it back into an object
@@ -41,56 +50,65 @@ export const EmployeeForm = () => {
        })
        .then(response => response.json())
        .then(() =>  {
-            // Do nothing
+            setFeedback("Employee profile successfully updated!")
        })
 
 
     };
 
     return (
-        <form className='profile'>
-            <h2 className='profile__title'>New Service Ticket</h2>
-            <fieldset>
-                <div className='form-group'>
-                    <label htmlFor='specialty'>Specialty:</label>
-                    <input
-                        required
-                        autoFocus
-                        type='text'
-                        className='form-control'
-                        value={profile.specialty}
-                        onChange={(evt) => {
-                            // Copy state
-                            const copy = {...profile}
-                            // Modify the copy
-                            copy.specialty = evt.target.value
-                            // Update state with the copy
-                            updateProfile(copy)
-                        }}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className='form-group'>
-                    <label htmlFor='name'>Hourly rate:</label>
-                    <input
-                        type='number'
-                        className='form-control'
-                        value={profile.rate}
-                        onChange={(evt) => {
-                            // Copy state
-                            const copy = { ...profile };
-                            // Modify the copy
-                            copy.rate = parseFloat(evt.target.value, 2);
-                            // Update state with the copy
-                            updateProfile(copy);
-                        }}
-                    />
-                </div>
-            </fieldset>
-            <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} className='btn btn-primary'>
-                Save Profile
-            </button>
-        </form>
+        <>
+            <div
+                className={`${feedback.includes('Error') ? 'error' : 'feedback'} ${
+                    feedback === '' ? 'invisible' : 'visible'
+                }`}
+            >
+                {feedback}
+            </div>
+            <form className='profile'>
+                <h2 className='profile__title'>New Service Ticket</h2>
+                <fieldset>
+                    <div className='form-group'>
+                        <label htmlFor='specialty'>Specialty:</label>
+                        <input
+                            required
+                            autoFocus
+                            type='text'
+                            className='form-control'
+                            value={profile.specialty}
+                            onChange={(evt) => {
+                                // Copy state
+                                const copy = { ...profile };
+                                // Modify the copy
+                                copy.specialty = evt.target.value;
+                                // Update state with the copy
+                                updateProfile(copy);
+                            }}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className='form-group'>
+                        <label htmlFor='name'>Hourly rate:</label>
+                        <input
+                            type='number'
+                            className='form-control'
+                            value={profile.rate}
+                            onChange={(evt) => {
+                                // Copy state
+                                const copy = { ...profile };
+                                // Modify the copy
+                                copy.rate = parseFloat(evt.target.value, 2);
+                                // Update state with the copy
+                                updateProfile(copy);
+                            }}
+                        />
+                    </div>
+                </fieldset>
+                <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} className='btn btn-primary'>
+                    Save Profile
+                </button>
+            </form>
+        </>
     );
 }
