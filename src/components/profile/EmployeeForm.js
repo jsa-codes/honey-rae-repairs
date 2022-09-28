@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { json } from 'react-router-dom';
 
 export const EmployeeForm = () => {
     // TO-DO: Provide initial state for profile
@@ -27,9 +28,23 @@ export const EmployeeForm = () => {
         event.preventDefault();
 
         /*
-            TO-DO: Perform the PUT fetch() call here to update the profile.
+            TO-DO: Perform the PUT fetch() call here, with options, to update the profile.
             Navigate user to home page when done.
         */
+       return fetch(`http://localhost:8088/employees/${profile.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            // Stringify the state variable
+            body: JSON.stringify(profile)
+       })
+       .then(response => response.json())
+       .then(() =>  {
+       
+       })
+
+
     };
 
     return (
