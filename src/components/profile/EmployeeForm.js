@@ -41,7 +41,7 @@ export const EmployeeForm = () => {
        })
        .then(response => response.json())
        .then(() =>  {
-       
+            // Do nothing
        })
 
 
