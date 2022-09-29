@@ -7,7 +7,7 @@ export const CustomerList = () => {
     // STEP 2) Iterates the array in the JSX
     // STEP 3) Display the name of each Customer
     // STEP 4) Passes each object to the Customer component as a "prop"
-
+ 
     const [customers, setCustomers] = useState([]);
 
     useEffect(
