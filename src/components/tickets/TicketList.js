@@ -121,17 +121,8 @@ export const TicketList = ({ searchTermState }) => {
             <h2>List of Tickets</h2>
 
             <article className='tickets'>
-                {filteredTickets.map((ticket) => {
-                    return (
-                        <section className='ticket' key={`ticket--${ticket.id}`}>
-                            <header>
-                                <Link to={`/tickets/${ticket.id}/edit`}>Ticket {ticket.id}</Link>
-                            </header>
-                            <section>{ticket.description}</section>
-                            <footer>Emergency: {ticket.emergency ? '🆘' : 'No'}</footer>
-                        </section>
-                    );
-                })}
+                {filteredTickets.map(
+                    (ticket) => <Ticket ticketObject={ticket}/>)}
             </article>
         </>
     );
