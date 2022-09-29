@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Ticket } from './Ticket';
 import './TicketList.css';
 
 // Initial state of tickets is an "empty array"
@@ -122,7 +123,7 @@ export const TicketList = ({ searchTermState }) => {
 
             <article className='tickets'>
                 {filteredTickets.map(
-                    (ticket) => <Ticket ticketObject={ticket}/>)}
+                    (ticket) => <Ticket isStaff={honeyUserObject.staff} ticketObject={ticket}/>)}
             </article>
         </>
     );
