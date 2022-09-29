@@ -19,9 +19,11 @@ export const CustomerViews = () => {
                 }
             >
                 <Route path='tickets' element={<TicketList />} />
+                        <Route path='ticket/create' element={<TicketForm />} />
                 <Route path='tickets/:ticketId/edit' element={<TicketEdit />} />
                 <Route path='profile' element={<Profile />} />
-                <Route path='ticket/create' element={<TicketForm />} />
+                
+                
             </Route>
         </Routes>
     );

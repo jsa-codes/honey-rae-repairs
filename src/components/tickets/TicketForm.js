@@ -1,10 +1,10 @@
-import { click } from '@testing-library/user-event/dist/click'
+
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export const TicketForm = () => {
     /*
-        TODO: Add the correct default properties to the
+        TO-DO: Add the correct default properties to the
         initial state object
     */
     const [ticket, update] = useState({
@@ -25,7 +25,7 @@ export const TicketForm = () => {
         event.preventDefault();
         console.log('You clicked the button!');
 
-        // TODO: Create the object to be saved to the API
+        // TO-DO: Create the object to be saved to the API
         /* 
             {
                 "id": 1,

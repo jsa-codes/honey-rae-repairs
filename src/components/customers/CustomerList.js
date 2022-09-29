@@ -17,7 +17,7 @@ export const CustomerList = () => {
             .then((customerArray) => {
                 setCustomers(customerArray);
             });
-    }, [customers]);
+    }, []);
 
     return <article className='customers'>
         {
@@ -25,10 +25,9 @@ export const CustomerList = () => {
             <Customer
                 key={`customer--${customer.id}`}
                 id={customer.id}
-                fullName={customer?.user?.fullName}
-                email={customer?.user?.email}
-                phoneNumber={customer.phoneNumber}
+                fullName={customer.user.fullName}
                 address={customer.address}
+                phoneNumber={customer.phoneNumber}
                 />)
         }
 

@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
 
-
 export const CustomerForm = () => {
     // TO-DO: Provide initial state for profile
     const [profile, updateProfile] = useState({
         address: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        userId: 0,
     });
 
     const [feedback, setFeedback] = useState('');
+
+    // Get the item out of localStorage
+    const localHoneyUser = localStorage.getItem('honey_user');
+    // Parse it back into an object
+    const honeyUserObject = JSON.parse(localHoneyUser);
 
     useEffect(() => {
         if (feedback !== '') {
@@ -16,11 +21,6 @@ export const CustomerForm = () => {
             setTimeout(() => setFeedback(''), 3000);
         }
     }, [feedback]);
-
-    // Get the item out of localStorage
-    const localHoneyUser = localStorage.getItem('honey_user');
-    // Parse it back into an object
-    const honeyUserObject = JSON.parse(localHoneyUser);
 
     // TO-DO: Get employee profile info from API and update state
     useEffect(() => {
@@ -46,19 +46,16 @@ export const CustomerForm = () => {
             },
             // Stringify the state variable
             body: JSON.stringify(profile),
-        })
-            .then((response) => response.json())
-            .then(() => {
-                setFeedback('Customer profile successfully updated!');
-            });
+        }).then(() => {
+            setFeedback('Customer profile successfully updated!');
+        });
     };
 
     return (
         <>
             <div
-                className={`${feedback.includes('Error') ? 'error' : 'feedback'} ${
-                    feedback === '' ? 'invisible' : 'visible'
-                }`}
+                className={`${feedback.includes('Error') ? 'error' : 'feedback'} 
+                ${feedback === '' ? 'invisible' : 'visible'}`}
             >
                 {feedback}
             </div>
@@ -86,7 +83,7 @@ export const CustomerForm = () => {
                 </fieldset>
                 <fieldset>
                     <div className='form-group'>
-                        <label htmlFor='name'>Phone Number:</label>
+                        <label htmlFor='number'>Phone Number:</label>
                         <input
                             type='number'
                             className='form-control'
