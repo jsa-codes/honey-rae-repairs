@@ -1,12 +1,12 @@
-export const Ticket = () => {
+export const Ticket = ({ ticketObject }) => {
     
     return (
-        <section className='ticket' key={`ticket--${ticket.id}`}>
+        <section className='ticket' key={`ticket--${ticketObject.id}`}>
             <header>
-                <Link to={`/tickets/${ticket.id}/edit`}>Ticket {ticket.id}</Link>
+                <Link to={`/tickets/${ticketObject.id}/edit`}>Ticket {ticketObject.id}</Link>
             </header>
-            <section>{ticket.description}</section>
-            <footer>Emergency: {ticket.emergency ? '🆘' : 'No'}</footer>
+            <section>{ticketObject.description}</section>
+            <footer>Emergency: {ticketObject.emergency ? '🆘' : 'No'}</footer>
         </section>
     );
 }
