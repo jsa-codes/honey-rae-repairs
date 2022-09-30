@@ -16,6 +16,25 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
     // Find the employee profile  object for the current user
     const userEmployee = employees.find(employee => employee.userId === currentUser.id)
 
+    // Function that determines if the currently logged in user can close the ticket
+    // Is the currently logged in user that same as the user assigned to the ticket?
+    // AND IF the date completed is empty.
+    const canClose = () => {
+        if (userEmployee?.id === assignedEmployee?.id && ticketObject.dateCompleted === "") {
+            return <button className='ticket__finish'>Finish</button>
+        } 
+        else {
+            return ""
+        }
+    }
+
+    //Function that updates the ticket with a new date completed
+    const closeTicket = () => {
+        const copy = {
+            
+        }
+    }
+
     const buttonOrNoButton = () => {
         if (currentUser.staff) {
         return <button
