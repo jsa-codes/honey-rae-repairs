@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Ticket } from './Ticket';
 import './TicketList.css';
 
@@ -7,6 +7,7 @@ import './TicketList.css';
 export const TicketList = ({ searchTermState }) => {
     // State #1) - All Tickets
     const [tickets, setTickets] = useState([]);
+    const [employees, setEmployees] = useState([]);
     // State #2) - Showing filtered tickets based on conditions of "employee or customer"
     const [filteredTickets, setFilteredTickets] = useState([]);
     // State #3) - Showing filtered tickets based on whether or not the employee clicked the "Emergency Only" button.
@@ -39,10 +40,15 @@ export const TicketList = ({ searchTermState }) => {
             // That data (a JSON string) is then converted to a JS string
             // It's then stored in the variable "ticketArray"
             // We then use the "setTickets" function to "set" the state to those tickets we now have.
-            fetch(`http://localhost:8088/serviceTickets`)
+            fetch(`http://localhost:8088/serviceTickets?_embed=employeeTickets`)
                 .then((response) => response.json())
                 .then((ticketArray) => {
                     setTickets(ticketArray);
+                });
+            fetch(`http://localhost:8088/employees?_expand=user`)
+                .then((response) => response.json())
+                .then((employeeArray) => {
+                    setEmployees(employeeArray);
                 });
         },
         [] // When this array is empty, you are observing initial component state
@@ -65,7 +71,6 @@ export const TicketList = ({ searchTermState }) => {
     );
 
     // State Change #3) - Filtered Tickets will now show ONLY Emergency Tickets
-
     useEffect(() => {
         if (emergency) {
             const emergencyTickets = tickets.filter((ticket) => ticket.emergency === true);
@@ -74,6 +79,8 @@ export const TicketList = ({ searchTermState }) => {
             setFilteredTickets(tickets);
         }
     }, [emergency]);
+
+
 
     useEffect(() => {
         if (openOnly) {
@@ -95,7 +102,9 @@ export const TicketList = ({ searchTermState }) => {
     // This way, Employees can click the "Emergency Only" button to see those tickets that are "emergency tickets (urgent tickets)", but customers will only see their tickets they've submitted displayed
     return (
         <>
-            {honeyUserObject.staff ? (
+            {
+            
+            honeyUserObject.staff ? (
                 <>
                     <button
                         onClick={() => {
@@ -118,12 +127,14 @@ export const TicketList = ({ searchTermState }) => {
                     <button onClick={() => updateOpenOnly(true)}>Show Open Tickets</button>
                     <button onClick={() => updateOpenOnly(false)}>All My Tickets</button>
                 </>
-            )}
+            )
+            
+            }
             <h2>List of Tickets</h2>
 
             <article className='tickets'>
                 {filteredTickets.map(
-                    (ticket) => <Ticket isStaff={honeyUserObject.staff} ticketObject={ticket}/>)}
+                    (ticket) => <Ticket employees={employees} isStaff={honeyUserObject.staff} ticketObject={ticket}/>)}
             </article>
         </>
     );
