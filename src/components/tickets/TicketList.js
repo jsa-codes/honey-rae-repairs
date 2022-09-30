@@ -32,6 +32,14 @@ export const TicketList = ({ searchTermState }) => {
         },[searchTermState]
     )
 
+    const getAllTickets = () => {
+        fetch(`http://localhost:8088/serviceTickets?_embed=employeeTickets`)
+                .then((response) => response.json())
+                .then((ticketArray) => {
+                    setTickets(ticketArray);
+                });
+    }
+
     // State Change #1) - Contains ALL of the tickets
     useEffect(
         () => {
@@ -40,11 +48,7 @@ export const TicketList = ({ searchTermState }) => {
             // That data (a JSON string) is then converted to a JS string
             // It's then stored in the variable "ticketArray"
             // We then use the "setTickets" function to "set" the state to those tickets we now have.
-            fetch(`http://localhost:8088/serviceTickets?_embed=employeeTickets`)
-                .then((response) => response.json())
-                .then((ticketArray) => {
-                    setTickets(ticketArray);
-                });
+            
                 // GET all employees AND expand the user object so we can get the fullName
                 // Make sure you have an employees state variable
             fetch(`http://localhost:8088/employees?_expand=user`)
