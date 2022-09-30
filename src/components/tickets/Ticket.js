@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export const Ticket = ({ ticketObject, isStaff, employees }) => {
+export const Ticket = ({ ticketObject, currentUser, employees }) => {
     
     let assignedEmployee = null
 
@@ -16,7 +16,7 @@ export const Ticket = ({ ticketObject, isStaff, employees }) => {
         <header>
             {
 
-                isStaff 
+                currentUser.staff 
                 ? `Ticket ${ticketObject.id}`
                 : <Link to={`/tickets/${ticketObject.id}/edit`}>Ticket {ticketObject.id}</Link>
             
@@ -31,7 +31,9 @@ export const Ticket = ({ ticketObject, isStaff, employees }) => {
                 // IF false then show the Claim button
                 ticketObject.employeeTickets.length
                     ? `Currently being worked on by ${assignedEmployee !== null ? assignedEmployee.user.fullName : ""} `
-                    : <button>Claim</button>
+                    : <button
+                        onClick={() =>{}}
+                        >Claim</button>
             }
         </footer>
         </section>
