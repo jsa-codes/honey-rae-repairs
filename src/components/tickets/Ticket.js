@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import "./Tickets.css"
 
 // getAllTickets is a function reference being passed down from the Parent
 export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) => {
@@ -21,7 +22,7 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
     // AND IF the date completed is empty.
     const canClose = () => {
         if (userEmployee?.id === assignedEmployee?.id && ticketObject.dateCompleted === "") {
-            return <button className='ticket__finish'>Finish</button>
+            return <button onClick={closeTicket} className='ticket__finish'>Finish</button>
         } 
         else {
             return ""
@@ -89,7 +90,7 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
             }
         </header>
         <section>{ticketObject.description}</section>
-        <section>Emergency: {ticketObject.emergency ? '🆘' : 'No'}</section>
+        <section className='emergency'>Emergency: {ticketObject.emergency ? '🆘' : 'No'}</section>
         <footer>
 
             {
@@ -98,6 +99,9 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
                 ticketObject.employeeTickets.length
                     ? `Currently being worked on by ${assignedEmployee !== null ? assignedEmployee?.user?.fullName : ""} `
                     : buttonOrNoButton()
+            }
+            {
+                canClose()
             }
         </footer>
         </section>
