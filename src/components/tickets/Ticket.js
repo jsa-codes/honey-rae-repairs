@@ -36,6 +36,18 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
             emergency: ticketObject.emergency,
             dateCompleted: new Date()
         }
+
+        return fetch(`http://localhost:8088/serviceTickets/${ticketObject.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(copy)
+        })
+        .then(response => response.json())
+        .then(() =>  {
+        
+        })
     }
 
     const buttonOrNoButton = () => {
