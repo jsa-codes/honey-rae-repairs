@@ -45,6 +45,7 @@ export const TicketList = ({ searchTermState }) => {
                 .then((ticketArray) => {
                     setTickets(ticketArray);
                 });
+                // GET all employees AND expand the user object so we can get the fullName
             fetch(`http://localhost:8088/employees?_expand=user`)
                 .then((response) => response.json())
                 .then((employeeArray) => {
