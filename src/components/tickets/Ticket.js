@@ -32,7 +32,22 @@ export const Ticket = ({ ticketObject, currentUser, employees }) => {
                 ticketObject.employeeTickets.length
                     ? `Currently being worked on by ${assignedEmployee !== null ? assignedEmployee.user.fullName : ""} `
                     : <button
-                        onClick={() =>{}}
+                        onClick={() =>{
+                            fetch(`http://localhost:8088/employeeTickets`, {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': "application/json"
+                                },
+                                body: JSON.stringify({
+                                    employeeId: currentUser.id,
+                                    serviceTicketId: ticketObject.id
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(() =>  {
+                                // GET the state from the API again
+                            })
+                        }}
                         >Claim</button>
             }
         </footer>
