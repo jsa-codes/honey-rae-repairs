@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 
-export const Ticket = ({ ticketObject, currentUser, employees }) => {
+// getAllTickets is a function reference being passed down from the Parent
+export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) => {
     
+    // Find the assigned employee for the current ticket
     let assignedEmployee = null
 
     // Checking the length of the array "employeeTickets," which is a property on ticketObject.
@@ -10,6 +12,9 @@ export const Ticket = ({ ticketObject, currentUser, employees }) => {
         const ticketEmployeeRelationship = ticketObject.employeeTickets[0]
         assignedEmployee = employees.find(employee => employee.id === ticketEmployeeRelationship.employeeId)
     }
+
+    // Find the employee profile  object for the current user
+    const userEmployee = employees.find(employee => employee.userId === currentUser.id)
 
 
     return (<section className='ticket' key={`ticket--${ticketObject.id}`}>
@@ -30,7 +35,7 @@ export const Ticket = ({ ticketObject, currentUser, employees }) => {
                 // IF true show the employee that is working on the ticket
                 // IF false then show the Claim button
                 ticketObject.employeeTickets.length
-                    ? `Currently being worked on by ${assignedEmployee !== null ? assignedEmployee.user.fullName : ""} `
+                    ? `Currently being worked on by ${assignedEmployee !== null ? assignedEmployee?.user?.fullName : ""} `
                     : <button
                         onClick={() =>{
                             fetch(`http://localhost:8088/employeeTickets`, {
@@ -39,13 +44,14 @@ export const Ticket = ({ ticketObject, currentUser, employees }) => {
                                     'Content-Type': "application/json"
                                 },
                                 body: JSON.stringify({
-                                    employeeId: currentUser.id,
+                                    employeeId: userEmployee.id,
                                     serviceTicketId: ticketObject.id
                                 })
                             })
                             .then(response => response.json())
                             .then(() =>  {
                                 // GET the state from the API again
+                                getAllTickets()
                             })
                         }}
                         >Claim</button>

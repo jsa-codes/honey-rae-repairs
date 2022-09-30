@@ -48,7 +48,7 @@ export const TicketList = ({ searchTermState }) => {
             // That data (a JSON string) is then converted to a JS string
             // It's then stored in the variable "ticketArray"
             // We then use the "setTickets" function to "set" the state to those tickets we now have.
-            
+            getAllTickets()
                 // GET all employees AND expand the user object so we can get the fullName
                 // Make sure you have an employees state variable
             fetch(`http://localhost:8088/employees?_expand=user`)
@@ -140,7 +140,10 @@ export const TicketList = ({ searchTermState }) => {
 
             <article className='tickets'>
                 {filteredTickets.map(
-                    (ticket) => <Ticket employees={employees} currentUser={honeyUserObject} ticketObject={ticket}/>)}
+                    (ticket) => <Ticket employees={employees} 
+                    getAllTickets={getAllTickets}
+                    currentUser={honeyUserObject} 
+                    ticketObject={ticket}/>)}
             </article>
         </>
     );
