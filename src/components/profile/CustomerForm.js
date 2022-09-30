@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+
 export const CustomerForm = () => {
     // TO-DO: Provide initial state for profile
     const [profile, updateProfile] = useState({
@@ -46,7 +47,9 @@ export const CustomerForm = () => {
             },
             // Stringify the state variable
             body: JSON.stringify(profile),
-        }).then(() => {
+        })
+        .then(response => response.json()) 
+        .then(() => {
             setFeedback('Customer profile successfully updated!');
         });
     };

@@ -16,6 +16,33 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
     // Find the employee profile  object for the current user
     const userEmployee = employees.find(employee => employee.userId === currentUser.id)
 
+    const buttonOrNoButton = () => {
+        if (currentUser.staff) {
+        return <button
+                        onClick={() =>{
+                            fetch(`http://localhost:8088/employeeTickets`, {
+                                method: "POST",
+                                headers: {
+                                    'Content-Type': "application/json"
+                                },
+                                body: JSON.stringify({
+                                    employeeId: userEmployee.id,
+                                    serviceTicketId: ticketObject.id
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(() =>  {
+                                // GET the state from the API again
+                                getAllTickets()
+                            })
+                        }}
+                        >Claim</button>
+                    }
+                    else {
+                            return ""
+                    }
+        }
+    
 
     return (<section className='ticket' key={`ticket--${ticketObject.id}`}>
         <header>
@@ -36,25 +63,7 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
                 // IF false then show the Claim button
                 ticketObject.employeeTickets.length
                     ? `Currently being worked on by ${assignedEmployee !== null ? assignedEmployee?.user?.fullName : ""} `
-                    : <button
-                        onClick={() =>{
-                            fetch(`http://localhost:8088/employeeTickets`, {
-                                method: "POST",
-                                headers: {
-                                    'Content-Type': "application/json"
-                                },
-                                body: JSON.stringify({
-                                    employeeId: userEmployee.id,
-                                    serviceTicketId: ticketObject.id
-                                })
-                            })
-                            .then(response => response.json())
-                            .then(() =>  {
-                                // GET the state from the API again
-                                getAllTickets()
-                            })
-                        }}
-                        >Claim</button>
+                    : buttonOrNoButton()
             }
         </footer>
         </section>
