@@ -31,7 +31,10 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
     //Function that updates the ticket with a new date completed
     const closeTicket = () => {
         const copy = {
-            
+            userId: ticketObject.userId,
+            description: ticketObject.description,
+            emergency: ticketObject.emergency,
+            dateCompleted: new Date()
         }
     }
 
