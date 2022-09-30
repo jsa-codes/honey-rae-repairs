@@ -6,6 +6,7 @@ export const Ticket = ({ ticketObject, isStaff, employees }) => {
 
     // Checking the length of the array "employeeTickets," which is a property on ticketObject.
     if (ticketObject.employeeTickets.length > 0) {
+        // The array is ONLY going to have one object in them, hence [0]. We extract that object from the array.
         const ticketEmployeeRelationship = ticketObject.employeeTickets[0]
         assignedEmployee = employees.find(employee => employee.id === ticketEmployeeRelationship.employeeId)
     }
