@@ -29,6 +29,27 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
         }
     }
 
+    // IF the current user is NOT staff...
+    // Fetch the serviceTicket with the ticket id that matches the ticket we're deleting, we have to make sure we are getting the right ticket so we use the route parameter which is the ticket's id.
+    // The only option we need is the method for deleting the ticket.
+    // THEN update state 
+    const deleteButton = () => {
+        if (!currentUser.staff) {
+            return <button onClick={() => {
+                fetch(`http://localhost:8088/serviceTickets/${ticketObject.id}`,{
+                    method: "DELETE"
+                })
+                .then(() => {
+                    getAllTickets()
+                })
+                
+            }} className='ticket__delete'>Delete</button>
+        } 
+        else {
+            return ""
+        }
+    }
+
     //Function that updates the ticket with a new date completed
     const closeTicket = () => {
         const copy = {
@@ -102,6 +123,9 @@ export const Ticket = ({ ticketObject, currentUser, employees, getAllTickets }) 
             }
             {
                 canClose()
+            }
+            {
+                deleteButton()
             }
         </footer>
         </section>
